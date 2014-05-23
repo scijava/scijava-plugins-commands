@@ -37,6 +37,7 @@ import java.io.IOException;
 import org.scijava.ItemIO;
 import org.scijava.command.Command;
 import org.scijava.command.ContextCommand;
+import org.scijava.io.IOPlugin;
 import org.scijava.io.IOService;
 import org.scijava.log.LogService;
 import org.scijava.menu.MenuConstants;
@@ -77,10 +78,16 @@ public class OpenFile extends ContextCommand {
 	@Override
 	public void run() {
 		try {
-			data = ioService.open(inputFile.getAbsolutePath());
+			final String source = inputFile.getAbsolutePath();
+			final IOPlugin<?> opener = ioService.getOpener(source);
+			if (opener == null) {
+				error("No appropriate format found: " + source);
+				return;
+			}
+			data = opener.open(source);
 			if (data == null) {
-				error("The file is not in a supported format\n\n" +
-					inputFile.getPath());
+				cancel(null);
+				return;
 			}
 		}
 		catch (final IOException exc) {
