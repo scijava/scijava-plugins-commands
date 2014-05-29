@@ -41,6 +41,7 @@ import org.scijava.io.IOPlugin;
 import org.scijava.io.IOService;
 import org.scijava.log.LogService;
 import org.scijava.menu.MenuConstants;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Menu;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -57,7 +58,7 @@ import org.scijava.ui.UIService;
 	menu = {
 		@Menu(label = MenuConstants.FILE_LABEL, weight = MenuConstants.FILE_WEIGHT,
 			mnemonic = MenuConstants.FILE_MNEMONIC),
-		@Menu(label = "Open...", weight = 1, mnemonic = 'o', accelerator = "^O") })
+		@Menu(label = "Open...", weight = 1, mnemonic = 'o', accelerator = "^O") }, attrs = { @Attr(name = "no-legacy") })
 public class OpenFile extends ContextCommand {
 
 	@Parameter
