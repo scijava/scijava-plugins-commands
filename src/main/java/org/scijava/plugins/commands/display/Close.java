@@ -36,6 +36,7 @@ import org.scijava.command.Command;
 import org.scijava.command.ContextCommand;
 import org.scijava.display.Display;
 import org.scijava.menu.MenuConstants;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Menu;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -48,7 +49,7 @@ import org.scijava.plugin.Plugin;
 @Plugin(type = Command.class, menu = {
 	@Menu(label = MenuConstants.FILE_LABEL, weight = MenuConstants.FILE_WEIGHT,
 		mnemonic = MenuConstants.FILE_MNEMONIC),
-	@Menu(label = "Close", weight = 16, mnemonic = 'c', accelerator = "^W") })
+	@Menu(label = "Close", weight = 16, mnemonic = 'c', accelerator = "^W") }, attrs = { @Attr(name = "no-legacy") })
 public class Close extends ContextCommand {
 
 	// -- Parameters --
