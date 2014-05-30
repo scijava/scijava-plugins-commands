@@ -43,6 +43,7 @@ import org.scijava.event.SciJavaEvent;
 import org.scijava.object.event.ObjectCreatedEvent;
 import org.scijava.object.event.ObjectDeletedEvent;
 import org.scijava.object.event.ObjectsListEvent;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
@@ -52,7 +53,8 @@ import org.scijava.plugin.Plugin;
  * @author Grant Harris
  * @author Curtis Rueden
  */
-@Plugin(type = Command.class, menuPath = "Plugins>Debug>Subscribers", headless = true)
+@Plugin(type = Command.class, menuPath = "Plugins>Debug>Subscribers",
+	headless = true, attrs = { @Attr(name = "no-legacy") })
 public class ShowSubscribers implements Command {
 
 	@Parameter

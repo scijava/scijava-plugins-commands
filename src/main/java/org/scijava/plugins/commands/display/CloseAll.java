@@ -51,7 +51,8 @@ import org.scijava.plugin.Plugin;
 @Plugin(type = Command.class, menu = {
 	@Menu(label = MenuConstants.FILE_LABEL, weight = MenuConstants.FILE_WEIGHT,
 		mnemonic = MenuConstants.FILE_MNEMONIC),
-	@Menu(label = "Close All", weight = 17) }, attrs = { @Attr(name = "no-legacy") })
+	@Menu(label = "Close All", weight = 17) },
+	attrs = { @Attr(name = "no-legacy") })
 public class CloseAll extends ContextCommand {
 
 	// -- Parameters --

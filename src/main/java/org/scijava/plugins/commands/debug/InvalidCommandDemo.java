@@ -33,6 +33,7 @@ package org.scijava.plugins.commands.debug;
 
 import org.scijava.ItemIO;
 import org.scijava.command.Command;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
@@ -67,7 +68,7 @@ public class InvalidCommandDemo {
 
 	/** A very much invalid command, for multiple reasons, explained below. */
 	@Plugin(type = Command.class, menuPath = "Plugins>Debug>Invalid Command",
-		headless = true)
+		headless = true, attrs = { @Attr(name = "no-legacy") })
 	public static class InvalidCommand extends ValidCommand {
 
 		/**

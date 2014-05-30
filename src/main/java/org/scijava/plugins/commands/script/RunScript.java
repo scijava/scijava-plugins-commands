@@ -40,6 +40,7 @@ import org.scijava.command.Command;
 import org.scijava.command.ContextCommand;
 import org.scijava.log.LogService;
 import org.scijava.menu.MenuConstants;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Menu;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -54,7 +55,8 @@ import org.scijava.script.ScriptService;
 	@Menu(label = MenuConstants.PLUGINS_LABEL,
 		weight = MenuConstants.PLUGINS_WEIGHT,
 		mnemonic = MenuConstants.PLUGINS_MNEMONIC),
-	@Menu(label = "Run Script...", mnemonic = 's') }, headless = true)
+	@Menu(label = "Run Script...", mnemonic = 's') }, headless = true,
+	attrs = { @Attr(name = "no-legacy") })
 public class RunScript extends ContextCommand {
 
 	@Parameter

@@ -58,7 +58,8 @@ import org.scijava.ui.UIService;
 	menu = {
 		@Menu(label = MenuConstants.FILE_LABEL, weight = MenuConstants.FILE_WEIGHT,
 			mnemonic = MenuConstants.FILE_MNEMONIC),
-		@Menu(label = "Open...", weight = 1, mnemonic = 'o', accelerator = "^O") }, attrs = { @Attr(name = "no-legacy") })
+		@Menu(label = "Open...", weight = 1, mnemonic = 'o', accelerator = "^O") },
+	attrs = { @Attr(name = "no-legacy") })
 public class OpenFile extends ContextCommand {
 
 	@Parameter

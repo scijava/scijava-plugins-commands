@@ -35,6 +35,7 @@ import org.scijava.command.Command;
 import org.scijava.command.ContextCommand;
 import org.scijava.command.Previewable;
 import org.scijava.log.LogService;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 
@@ -48,7 +49,7 @@ import org.scijava.plugin.Plugin;
  * @author Curtis Rueden
  */
 @Plugin(type = Command.class, menuPath = "Plugins>Sandbox>Parameter Assignment Order",
-	headless = true, initializer = "initParams")
+	headless = true, initializer = "initParams", attrs = { @Attr(name = "no-legacy") })
 public class ParamAssignOrder extends ContextCommand implements Previewable {
 
 	@Parameter
