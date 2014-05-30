@@ -34,6 +34,7 @@ package org.scijava.plugins.commands.io;
 import org.scijava.command.Command;
 import org.scijava.io.RecentFileService;
 import org.scijava.menu.MenuConstants;
+import org.scijava.plugin.Attr;
 import org.scijava.plugin.Menu;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -48,7 +49,7 @@ import org.scijava.plugin.Plugin;
 		mnemonic = MenuConstants.FILE_MNEMONIC),
 	@Menu(label = "Open Recent", weight = 4, mnemonic = 'r'),
 	@Menu(label = "Clear List", weight = RecentFileService.MAX_FILES_SHOWN + 10,
-		mnemonic = 'c') })
+		mnemonic = 'c') },  attrs = { @Attr(name = "no-legacy") })
 public class ClearRecent implements Command {
 
 	@Parameter
