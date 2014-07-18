@@ -45,6 +45,7 @@ import org.scijava.Context;
 import org.scijava.ItemIO;
 import org.scijava.app.App;
 import org.scijava.app.AppService;
+import org.scijava.app.StatusService;
 import org.scijava.command.Command;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -76,6 +77,9 @@ public class SystemInformation implements Command {
 	@Parameter
 	private AppService appService;
 
+	@Parameter
+	private StatusService statusService;
+
 	@Parameter(label = "System Information", type = ItemIO.OUTPUT)
 	private String info;
 
@@ -83,12 +87,19 @@ public class SystemInformation implements Command {
 
 	@Override
 	public void run() {
+		int progress = 0, max = 8;
+		statusService.showStatus(0, max, "Gathering system information");
+
 		final StringBuilder sb = new StringBuilder();
 
 		// dump basic version information (similar to the status bar)
+
 		sb.append(appService.getApp().getInfo(false) + NL);
 
+		statusService.showProgress(++progress, max);
+
 		// dump information about available SciJava applications
+
 		final Map<String, App> apps = appService.getApps();
 		for (final String name : apps.keySet()) {
 			final App app = apps.get(name);
@@ -103,6 +114,8 @@ public class SystemInformation implements Command {
 				sb.append(getManifestData(manifest));
 			}
 		}
+
+		statusService.showProgress(++progress, max);
 
 		// dump all available Maven metadata on the class path
 
@@ -124,6 +137,8 @@ public class SystemInformation implements Command {
 					pom.getVersion() + " shadows " + priorPOM.getVersion() + NL);
 			}
 		}
+
+		statusService.showProgress(++progress, max);
 
 		// output libraries in sorted order
 		final ArrayList<POM> sortedPOMs = new ArrayList<POM>(poms);
@@ -151,7 +166,10 @@ public class SystemInformation implements Command {
 			if (orgURL != null) sb.append("\torganization URL = " + orgURL + NL);
 		}
 
+		statusService.showProgress(++progress, max);
+
 		// compute the set of known plugin types
+
 		final List<PluginInfo<?>> plugins = context.getPluginIndex().getAll();
 		final HashSet<Class<? extends SciJavaPlugin>> pluginTypeSet =
 			new HashSet<Class<? extends SciJavaPlugin>>();
@@ -159,7 +177,10 @@ public class SystemInformation implements Command {
 			pluginTypeSet.add(plugin.getPluginType());
 		}
 
+		statusService.showProgress(++progress, max);
+
 		// convert to a list of plugin types, sorted by fully qualified class name
+
 		final ArrayList<Class<? extends SciJavaPlugin>> pluginTypes =
 			new ArrayList<Class<? extends SciJavaPlugin>>(pluginTypeSet);
 		Collections.sort(pluginTypes, new Comparator<Class<?>>() {
@@ -171,17 +192,27 @@ public class SystemInformation implements Command {
 
 		});
 
+		statusService.showProgress(++progress, max);
+
 		// dump the list of available plugins, organized by plugin type
+
 		for (final Class<? extends SciJavaPlugin> pluginType : pluginTypes) {
 			dumpPlugins(sb, pluginType);
 		}
 
+		statusService.showProgress(++progress, max);
+
 		// dump system properties
+
 		sb.append(NL);
 		sb.append("-- System properties --" + NL);
 		sb.append(getSystemProperties());
 
+		statusService.showProgress(++progress, max);
+
 		info = sb.toString();
+
+		statusService.clearStatus();
 	}
 
 	// -- Utility methods --
