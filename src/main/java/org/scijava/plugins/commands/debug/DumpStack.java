@@ -56,7 +56,7 @@ import org.scijava.plugin.Plugin;
 	@Menu(label = MenuConstants.PLUGINS_LABEL,
 		weight = MenuConstants.PLUGINS_WEIGHT,
 		mnemonic = MenuConstants.PLUGINS_MNEMONIC), @Menu(label = "Debug"),
-	@Menu(label = "Dump Stack", accelerator = "ctrl back_slash") },
+	@Menu(label = "Dump Stack", accelerator = "shift back_slash") },
 	headless = true)
 public class DumpStack implements Command {
 
