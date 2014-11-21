@@ -87,7 +87,7 @@ public class SystemInformation implements Command {
 
 	@Override
 	public void run() {
-		int progress = 0, max = 8;
+		int progress = 0, max = 9;
 		statusService.showStatus(0, max, "Gathering system information");
 
 		final StringBuilder sb = new StringBuilder();
@@ -210,6 +210,14 @@ public class SystemInformation implements Command {
 
 		statusService.showProgress(++progress, max);
 
+		// dump environment variables
+
+		sb.append(NL);
+		sb.append("-- Environment variables --" + NL);
+		sb.append(getEnvironmentVariables());
+
+		statusService.showProgress(++progress, max);
+
 		info = sb.toString();
 
 		statusService.clearStatus();
@@ -221,12 +229,16 @@ public class SystemInformation implements Command {
 		return mapToString(System.getProperties());
 	}
 
+	public static String getEnvironmentVariables() {
+		return mapToString(System.getenv());
+	}
+
 	public static String getManifestData(final Manifest manifest) {
 		if (manifest == null) return null;
 		return mapToString(manifest.getAll());
 	}
 
-	public static String mapToString(final Map<Object, Object> map) {
+	public static String mapToString(final Map<?, ?> map) {
 		final StringBuilder sb = new StringBuilder();
 
 		// sort keys by string representation
