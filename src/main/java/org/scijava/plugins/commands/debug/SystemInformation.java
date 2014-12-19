@@ -159,6 +159,7 @@ public class SystemInformation implements Command {
 			final String orgURL = pom.getOrganizationURL();
 			final String title = name == null ? groupId + ":" + artifactId : name;
 
+			final String scmConnection = pom.cdata("//project/scm/connection");
 			final String scmTag = pom.cdata("//project/scm/tag");
 			String sourceRef = null;
 			if (scmTag == null || scmTag.isEmpty() || scmTag.equals("HEAD") ||
@@ -195,6 +196,7 @@ public class SystemInformation implements Command {
 			if (year != null) sb.append("inception year = " + year + NL);
 			if (orgName != null) sb.append("organization name = " + orgName + NL);
 			if (orgURL != null) sb.append("organization URL = " + orgURL + NL);
+			if (scmConnection != null) sb.append("scm = " + scmConnection + NL);
 			if (sourceRef != null) sb.append("source ref = " + sourceRef + NL);
 		}
 
