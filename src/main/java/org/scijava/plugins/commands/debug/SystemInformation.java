@@ -32,6 +32,9 @@
 package org.scijava.plugins.commands.debug;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.JarURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,6 +50,7 @@ import org.scijava.app.App;
 import org.scijava.app.AppService;
 import org.scijava.app.StatusService;
 import org.scijava.command.Command;
+import org.scijava.log.LogService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 import org.scijava.plugin.PluginInfo;
@@ -79,6 +83,9 @@ public class SystemInformation implements Command {
 
 	@Parameter
 	private StatusService statusService;
+
+	@Parameter
+	private LogService log;
 
 	@Parameter(label = "System Information", type = ItemIO.OUTPUT)
 	private String info;
@@ -121,9 +128,6 @@ public class SystemInformation implements Command {
 
 		final List<POM> poms = POM.getAllPOMs();
 
-		sb.append(NL);
-		sb.append("-- Libraries --" + NL);
-
 		// check for library version clashes
 		final HashMap<String, POM> pomsByGA = new HashMap<String, POM>();
 		for (final POM pom : poms) {
@@ -155,15 +159,16 @@ public class SystemInformation implements Command {
 			final String orgURL = pom.getOrganizationURL();
 			final String title = name == null ? groupId + ":" + artifactId : name;
 
-			sb.append(title + ":" + NL);
-			if (pomPath != null) sb.append("\tpath = " + pomPath + NL);
-			if (groupId != null) sb.append("\tgroupId = " + groupId + NL);
-			if (artifactId != null) sb.append("\tartifactId = " + artifactId + NL);
-			if (version != null) sb.append("\tversion = " + version + NL);
-			if (url != null) sb.append("\tproject URL = " + url + NL);
-			if (year != null) sb.append("\tinception year = " + year + NL);
-			if (orgName != null) sb.append("\torganization name = " + orgName + NL);
-			if (orgURL != null) sb.append("\torganization URL = " + orgURL + NL);
+			sb.append(NL);
+			sb.append("-- Library: " + title + " --" + NL);
+			if (pomPath != null) sb.append("path = " + pomPath + NL);
+			if (groupId != null) sb.append("groupId = " + groupId + NL);
+			if (artifactId != null) sb.append("artifactId = " + artifactId + NL);
+			if (version != null) sb.append("version = " + version + NL);
+			if (url != null) sb.append("project URL = " + url + NL);
+			if (year != null) sb.append("inception year = " + year + NL);
+			if (orgName != null) sb.append("organization name = " + orgName + NL);
+			if (orgURL != null) sb.append("organization URL = " + orgURL + NL);
 		}
 
 		statusService.showProgress(++progress, max);
