@@ -94,8 +94,12 @@ public class SystemInformation implements Command {
 
 	@Override
 	public void run() {
-		int progress = 0, max = 9;
-		statusService.showStatus(0, max, "Gathering system information");
+		statusService.showStatus("Gathering system information");
+
+		final List<POM> poms = POM.getAllPOMs();
+
+		int progress = 0, max = 9 + poms.size();
+		statusService.showProgress(++progress, max);
 
 		final StringBuilder sb = new StringBuilder();
 
@@ -126,8 +130,6 @@ public class SystemInformation implements Command {
 
 		// dump all available Maven metadata on the class path
 
-		final List<POM> poms = POM.getAllPOMs();
-
 		// check for library version clashes
 		final HashMap<String, POM> pomsByGA = new HashMap<String, POM>();
 		for (final POM pom : poms) {
@@ -148,6 +150,8 @@ public class SystemInformation implements Command {
 		final ArrayList<POM> sortedPOMs = new ArrayList<POM>(poms);
 		Collections.sort(sortedPOMs);
 		for (final POM pom : sortedPOMs) {
+			statusService.showProgress(++progress, max);
+
 			final String pomPath = pom.getPath();
 			final String groupId = pom.getGroupId();
 			final String artifactId = pom.getArtifactId();
