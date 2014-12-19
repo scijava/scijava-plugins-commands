@@ -159,6 +159,32 @@ public class SystemInformation implements Command {
 			final String orgURL = pom.getOrganizationURL();
 			final String title = name == null ? groupId + ":" + artifactId : name;
 
+			final String scmTag = pom.cdata("//project/scm/tag");
+			String sourceRef = null;
+			if (scmTag == null || scmTag.isEmpty() || scmTag.equals("HEAD") ||
+				scmTag.equals("master"))
+			{
+				// look in the JAR manifest for the commit hash
+				// TODO: Make POM API support obtaining the associated Manifest.
+
+				// grab Implementation-Build entry out of the JAR manifest
+				if (pomPath != null && pomPath.contains(".jar!")) {
+					final String jarPath = pomPath.substring(0, pomPath.indexOf("!"));
+					try {
+						final URL jarURL = new URL("jar:" + jarPath + "!/");
+						final JarURLConnection conn =
+								(JarURLConnection) jarURL.openConnection();
+						final String key = "Implementation-Build";
+						sourceRef = conn.getManifest().getMainAttributes().getValue(key);
+					}
+					catch (final IOException e) { }
+				}
+			}
+			else {
+				// ref is a valid tag
+				sourceRef = scmTag;
+			}
+
 			sb.append(NL);
 			sb.append("-- Library: " + title + " --" + NL);
 			if (pomPath != null) sb.append("path = " + pomPath + NL);
@@ -169,6 +195,7 @@ public class SystemInformation implements Command {
 			if (year != null) sb.append("inception year = " + year + NL);
 			if (orgName != null) sb.append("organization name = " + orgName + NL);
 			if (orgURL != null) sb.append("organization URL = " + orgURL + NL);
+			if (sourceRef != null) sb.append("source ref = " + sourceRef + NL);
 		}
 
 		statusService.showProgress(++progress, max);
