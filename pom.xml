@@ -15,7 +15,6 @@
 	<name>SciJava Plugins: Commands</name>
 	<description>Core commands for SciJava applications.</description>
 	<inceptionYear>2010</inceptionYear>
-
 	<licenses>
 		<license>
 			<name>Simplified BSD License</name>
@@ -55,12 +54,10 @@
 		<tag>HEAD</tag>
 		<url>https://github.com/scijava/scijava-plugins-commands</url>
 	</scm>
-
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>http://github.com/scijava/scijava-plugins-commands/issues</url>
 	</issueManagement>
-
 	<ciManagement>
 		<system>Jenkins</system>
 		<url>http://jenkins.imagej.net/job/SciJava-plugins-commands/</url>
@@ -98,5 +95,4 @@ Institute of Molecular Cell Biology and Genetics.</organizationName>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
