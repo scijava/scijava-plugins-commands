@@ -44,6 +44,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+
 import org.scijava.Context;
 import org.scijava.ItemIO;
 import org.scijava.app.App;
@@ -98,7 +101,7 @@ public class SystemInformation implements Command {
 
 		final List<POM> poms = POM.getAllPOMs();
 
-		int progress = 0, max = 9 + poms.size();
+		int progress = 0, max = 10 + poms.size();
 		statusService.showProgress(++progress, max);
 
 		final StringBuilder sb = new StringBuilder();
@@ -258,6 +261,14 @@ public class SystemInformation implements Command {
 
 		statusService.showProgress(++progress, max);
 
+		// dump miscellaneous extra information
+
+		sb.append(NL);
+		sb.append("-- Additional miscellany --" + NL);
+		sb.append(getMiscellany());
+
+		statusService.showProgress(++progress, max);
+
 		info = sb.toString();
 
 		statusService.clearStatus();
@@ -271,6 +282,20 @@ public class SystemInformation implements Command {
 
 	public static String getEnvironmentVariables() {
 		return mapToString(System.getenv());
+	}
+
+	public static String getMiscellany() {
+		final HashMap<String, Object> miscellany = new HashMap<String, Object>();
+
+		final JavaCompiler sjc = ToolProvider.getSystemJavaCompiler();
+		final String sjcName = sjc == null ? null : sjc.getClass().getName();
+		miscellany.put("System Java compiler", sjcName);
+
+		final ClassLoader stcl = ToolProvider.getSystemToolClassLoader();
+		final String stclName = stcl == null ? null : stcl.getClass().getName();
+		miscellany.put("System tool class loader", stclName);
+
+		return mapToString(miscellany);
 	}
 
 	public static String getManifestData(final Manifest manifest) {
