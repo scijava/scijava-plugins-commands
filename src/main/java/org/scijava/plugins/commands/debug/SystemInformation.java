@@ -288,12 +288,10 @@ public class SystemInformation implements Command {
 		final HashMap<String, Object> miscellany = new HashMap<String, Object>();
 
 		final JavaCompiler sjc = ToolProvider.getSystemJavaCompiler();
-		final String sjcName = sjc == null ? null : sjc.getClass().getName();
-		miscellany.put("System Java compiler", sjcName);
+		miscellany.put("System Java compiler", classNameAndLocation(sjc));
 
 		final ClassLoader stcl = ToolProvider.getSystemToolClassLoader();
-		final String stclName = stcl == null ? null : stcl.getClass().getName();
-		miscellany.put("System tool class loader", stclName);
+		miscellany.put("System tool class loader", classNameAndLocation(stcl));
 
 		return mapToString(miscellany);
 	}
@@ -365,6 +363,12 @@ public class SystemInformation implements Command {
 			if (pluginType != plugin.getPluginType()) continue;
 			sb.append(plugin + NL);
 		}
+	}
+
+	private static String classNameAndLocation(final Object o) {
+		if (o == null) return null;
+		final Class<?> c = o.getClass();
+		return c.getName() + " [" + ClassUtils.getLocation(c) + "]";
 	}
 
 }
