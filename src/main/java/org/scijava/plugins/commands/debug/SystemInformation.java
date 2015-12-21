@@ -182,7 +182,9 @@ public class SystemInformation implements Command {
 						final String key = "Implementation-Build";
 						sourceRef = conn.getManifest().getMainAttributes().getValue(key);
 					}
-					catch (final IOException e) { }
+					catch (final IOException e) {
+						log.debug(e);
+					}
 				}
 			}
 			else {
