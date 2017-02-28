@@ -67,8 +67,8 @@
 		<url>http://github.com/scijava/scijava-plugins-commands/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://jenkins.imagej.net/job/SciJava-plugins-commands/</url>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/scijava/scijava-plugins-commands</url>
 	</ciManagement>
 
 	<dependencies>

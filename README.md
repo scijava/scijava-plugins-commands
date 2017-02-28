@@ -1,4 +1,4 @@
-[![](http://jenkins.imagej.net/job/SciJava-plugins-commands/lastBuild/badge/icon)](http://jenkins.imagej.net/job/SciJava-plugins-commands/)
+[![](https://travis-ci.org/scijava/scijava-plugins-commands.svg?branch=master)](https://travis-ci.org/scijava/scijava-plugins-commands)
 
 SciJava Plugins: Commands
 -------------------------
