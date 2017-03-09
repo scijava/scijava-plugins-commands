@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>9.4.0</version>
+		<version>14.0.0</version>
 		<relativePath />
 	</parent>
 
@@ -14,7 +14,12 @@
 
 	<name>SciJava Plugins: Commands</name>
 	<description>Core commands for SciJava applications.</description>
+	<url>https://imagej.net/SciJava Plugins: Commands</url>
 	<inceptionYear>2010</inceptionYear>
+	<organization>
+		<name>SciJava</name>
+		<url>https://scijava.org/</url>
+	</organization>
 	<licenses>
 		<license>
 			<name>Simplified BSD License</name>
@@ -56,6 +61,16 @@
 		</contributor>
 	</contributors>
 
+	<mailingLists>
+		<mailingList>
+			<name>SciJava</name>
+			<subscribe>https://groups.google.com/group/scijava</subscribe>
+			<unsubscribe>https://groups.google.com/group/scijava</unsubscribe>
+			<post>scijava.com</post>
+			<archive>https://groups.google.com/group/scijava</archive>
+		</mailingList>
+	</mailingLists>
+
 	<scm>
 		<connection>scm:git:git://github.com/scijava/scijava-plugins-commands</connection>
 		<developerConnection>scm:git:git@github.com:scijava/scijava-plugins-commands</developerConnection>
@@ -71,6 +86,14 @@
 		<url>https://travis-ci.org/scijava/scijava-plugins-commands</url>
 	</ciManagement>
 
+	<properties>
+		<package-name>org.scijava.plugins.commands</package-name>
+		<license.licenseName>bsd_2</license.licenseName>
+		<license.copyrightOwners>Board of Regents of the University of
+Wisconsin-Madison, Broad Institute of MIT and Harvard, and Max Planck
+Institute of Molecular Cell Biology and Genetics.</license.copyrightOwners>
+	</properties>
+
 	<dependencies>
 		<!-- SciJava dependencies -->
 		<dependency>
@@ -78,29 +101,4 @@
 			<artifactId>scijava-common</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<packageName>org.scijava.plugins.commands</packageName>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<configuration>
-					<licenseName>bsd_2</licenseName>
-					<organizationName>Board of Regents of the University of
-Wisconsin-Madison, Broad Institute of MIT and Harvard, and Max Planck
-Institute of Molecular Cell Biology and Genetics.</organizationName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
