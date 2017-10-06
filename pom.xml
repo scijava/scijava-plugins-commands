@@ -14,7 +14,7 @@
 
 	<name>SciJava Plugins: Commands</name>
 	<description>Core commands for SciJava applications.</description>
-	<url>https://imagej.net/SciJava Plugins: Commands</url>
+	<url>https://github.com/scijava/scijava-plugins-commands</url>
 	<inceptionYear>2010</inceptionYear>
 	<organization>
 		<name>SciJava</name>
