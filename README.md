@@ -1,4 +1,4 @@
-[![](https://travis-ci.org/scijava/scijava-plugins-commands.svg?branch=master)](https://travis-ci.org/scijava/scijava-plugins-commands)
+[![](https://github.com/scijava/scijava-plugins-commands/actions/workflows/build-main.yml/badge.svg)](https://github.com/scijava/scijava-plugins-commands/actions/workflows/build-main.yml)
 
 SciJava Plugins: Commands
 -------------------------
