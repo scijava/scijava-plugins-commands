@@ -39,6 +39,7 @@ import org.scijava.command.Command;
 import org.scijava.command.ContextCommand;
 import org.scijava.io.IOPlugin;
 import org.scijava.io.IOService;
+import org.scijava.io.location.FileLocation;
 import org.scijava.log.LogService;
 import org.scijava.menu.MenuConstants;
 import org.scijava.plugin.Attr;
@@ -80,7 +81,7 @@ public class OpenFile extends ContextCommand {
 	@Override
 	public void run() {
 		try {
-			final String source = inputFile.getAbsolutePath();
+			FileLocation source = new FileLocation(inputFile);
 			final IOPlugin<?> opener = ioService.getOpener(source);
 			if (opener == null) {
 				error("No appropriate format found: " + source);
