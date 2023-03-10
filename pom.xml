@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>scijava-plugins-commands</artifactId>
-	<version>0.2.4-SNAPSHOT</version>
+	<version>0.2.4</version>
 
 	<name>SciJava Plugins: Commands</name>
 	<description>Core commands for SciJava applications.</description>
@@ -74,7 +74,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/scijava/scijava-plugins-commands</connection>
 		<developerConnection>scm:git:git@github.com:scijava/scijava-plugins-commands</developerConnection>
-		<tag>HEAD</tag>
+		<tag>scijava-plugins-commands-0.2.4</tag>
 		<url>https://github.com/scijava/scijava-plugins-commands</url>
 	</scm>
 	<issueManagement>
