@@ -80,6 +80,15 @@ public class OpenFile extends ContextCommand {
 	@Override
 	public void run() {
 		try {
+			// NB: You might think we should always wrap the inputFile into a
+			// FileLocation, since it's... well... a File. But there are cases
+			// where a file path on disk ends up getting resolved into a non-file
+			// location. In particular, filenames ending in .fake are handled by
+			// SCIFIO's TestImgLocationResolver (when SCIFIO is part of the
+			// SciJava context, of course), to provide backward compatibility with
+			// the Bio-Formats-style test image mechanism. So we pass the absolute
+			// file path as a string to the IOService so that the location
+			// resolution mechanism can construct the correct Location object.
 			final String source = inputFile.getAbsolutePath();
 			final IOPlugin<?> opener = ioService.getOpener(source);
 			if (opener == null) {
